@@ -321,7 +321,21 @@ extern void stm32_usbinitialize(void);
 extern void board_peripheral_reset(int ms);
 
 #include <px4_platform_common/board_common.h>
+/*
+ * X650 4-channel NeoPixel — AUX1-4 trên TIM1 CH1-4 (PA8/PE11/PE13/PE14)
+ * Mapping xác nhận từ boards/px4/fmu-v6c/src/timer_config.cpp
+ */
+#define X650_LED_PER_ARM   4   // Xác nhận: 4 LED WS2812 mỗi arm, X650
 
+#define X650_ARM1_GPIO     (GPIO_ALT|GPIO_AF1|GPIO_PORTA|GPIO_PIN8)   // AUX1, TIM1_CH1
+#define X650_ARM2_GPIO     (GPIO_ALT|GPIO_AF1|GPIO_PORTE|GPIO_PIN11)  // AUX2, TIM1_CH2
+#define X650_ARM3_GPIO     (GPIO_ALT|GPIO_AF1|GPIO_PORTE|GPIO_PIN13)  // AUX3, TIM1_CH3
+#define X650_ARM4_GPIO     (GPIO_ALT|GPIO_AF1|GPIO_PORTE|GPIO_PIN14)  // AUX4, TIM1_CH4
+
+#define X650_ARM1_DMA      DMAMAP_DMA12_TIM1CH1_0   // TODO: xác nhận đúng tên DMAMAP
+#define X650_ARM2_DMA      DMAMAP_DMA12_TIM1CH2_0
+#define X650_ARM3_DMA      DMAMAP_DMA12_TIM1CH3_0
+#define X650_ARM4_DMA      DMAMAP_DMA12_TIM1CH4_0
 #endif /* __ASSEMBLY__ */
 
 __END_DECLS
